@@ -10,5 +10,10 @@ And 2. I don't wanna do it just to be on the safe side, I'm also a lazy bitch
 
 How to execute:
 
-```chmod +x installJava.sh (or installJavaJVM.sh if you downloaded that instead)
-./installJava.sh```
+```chmod +x installJava.sh && ./installJava.sh```
+
+
+If you downloaded the JVM version:
+
+
+```chmod +x installJavaJVM.sh && ./installJavaJVM.sh```
