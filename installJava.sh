@@ -1,14 +1,14 @@
-read -p "This script does NOT download the JDK/JRE, you have to manually download the tar.gz format of your corresponding version from the official Orcale website. 
+read -p "This script does NOT download the JDK/JRE, you have to manually download the tar.gz format of your corresponding version from the official Orcale website, alternatively, you can also download the tar.gz formats from java.com. 
 
-On Java SE 11 and higher, Orcale officially released DEB formats, so you can go install that if you want. 
+DEB formats were released for Java SE 11 and higher, so you don't even need the script. For Java SE 8, you'd still need this script as there are currently no official releases of the DEB format.
 
-If you want JavaFX, download Java 8 (JDK or JRE it doesn't matter). 
-This will remove your existing java installation, understood? (y/n) " choice
+For some JavaFX apps, you'd need to download the Orcale version of Java 8 as OpenJDK's bring the "could not find or load main class blah blah blah".
+This will remove your existing Java installation, understood? (y/n) " choice
 case "$choice" in 
   y|Y ) echo " ";;
   n|N ) echo "Abort" 
 exit;;
-  * ) echo -e "\e[31mYou have to say y or n, don't play with me smh"
+  * ) echo -e "\e[31mYou have to say y or n, don't play with me, I'm not a toy smmfh"
 exit;;
 esac
 if [[ -d "/usr/java" ]]
@@ -21,8 +21,8 @@ REQUIRED_PKG="tar"
 PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
 echo Checking for $REQUIRED_PKG: $PKG_OK
 if [ "" = "$PKG_OK" ]; then
-  echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
-  sudo apt-get --yes install $REQUIRED_PKG 
+  echo "The package $REQUIRED_PKG was not found, the script will not work properly without this package. I'll just install it for you...god I regret everything"
+  sudo apt-get --assume-yes install $REQUIRED_PKG 
 fi
 PS3='Which Java version do you have downloaded?: '
 options=("Java 8 (JDK)" "Java 8 (JRE)" "Java 8 32bit (JDK)" "Java 8 32bit (JRE)" "Java 8 " "Java 14" "Java 11")
