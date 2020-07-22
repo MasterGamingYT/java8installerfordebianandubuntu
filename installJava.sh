@@ -17,15 +17,21 @@ then
 else 
     sudo mkdir /usr/java
 fi
+REQUIRED_PKG="tar"
+PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
+echo Checking for $REQUIRED_PKG: $PKG_OK
+if [ "" = "$PKG_OK" ]; then
+  echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
+  sudo apt-get --yes install $REQUIRED_PKG 
+fi
 PS3='Which Java version do you have downloaded?: '
 options=("Java 8 (JDK)" "Java 8 (JRE)" "Java 8 32bit (JDK)" "Java 8 32bit (JRE)" "Java 8 " "Java 14" "Java 11")
 select opt in "${options[@]}"
 do
     case $opt in
         "Java 8 (JDK)")
-            sudo tar zxvf jdk-8u261-linux-x64.tar.gz
+            sudo tar zxvf jdk-8u261-linux-x64.tar.gz -C /usr/java
             sudo rm jdk-8u261-linux-x64.tar.gz
-            sudo mv jdk1.8.0_261 /usr/java
             export JAVA_BIN_DIR=/usr/java/jdk1.8.0_261/bin
             cd ${JAVA_BIN_DIR}
             a=(java javac javadoc javah javap javaws)
@@ -43,9 +49,8 @@ fi
             exit
             ;;
         "Java 8 (JRE)")
-            sudo tar zxvf jre-8u261-linux-x64.tar.gz
+            sudo tar zxvf jre-8u261-linux-x64.tar.gz -C /usr/java
             sudo rm jre-8u261-linux-x64.tar.gz
-            sudo mv jre1.8.0_261 /usr/java
             export JAVA_BIN_DIR=/usr/java/jre1.8.0_261/bin
             cd ${JAVA_BIN_DIR}
             a=(java javac javadoc javah javap javaws)
@@ -62,9 +67,8 @@ fi
             exit
             ;;
         "Java 14")
-            sudo tar zxvf jdk-14.0.2_linux-x64_bin.tar.gz
+            sudo tar zxvf jdk-14.0.2_linux-x64_bin.tar.gz -C /usr/java
             sudo rm jdk-14.0.2_linux-x64_bin.tar.gz
-            sudo mv jdk-14.0.2 /usr/java
             export JAVA_BIN_DIR=/usr/java/jdk-14.0.2/bin
             cd ${JAVA_BIN_DIR}
             a=(java javac javadoc javah javap javaws)
@@ -81,9 +85,8 @@ fi
             exit
             ;;
         "Java 11")
-            sudo tar zxvf jdk-11.0.8_linux-x64_bin.tar.gz
+            sudo tar zxvf jdk-11.0.8_linux-x64_bin.tar.gz -C /usr/java
             sudo rm jdk-11.0.8_linux-x64_bin.tar.gz
-            sudo mv jdk-11.0.8 /usr/java
             export JAVA_BIN_DIR=/usr/java/jdk-11.0.8/bin
             cd ${JAVA_BIN_DIR}
             a=(java javac javadoc javah javap javaws)
@@ -100,9 +103,8 @@ fi
             exit
             ;;
         "Java 8 32bit (JDK)")
-            sudo tar zxvf jdk-8u261-linux-i586.tar.gz
+            sudo tar zxvf jdk-8u261-linux-i586.tar.gz -C /usr/java
             sudo rm jdk-8u261-linux-i586.tar.gz
-            sudo mv jdk1.8.0_261 /usr/java
             export JAVA_BIN_DIR=/usr/java/jdk1.8.0_261/bin
             cd ${JAVA_BIN_DIR}
             a=(java javac javadoc javah javap javaws)
@@ -120,9 +122,8 @@ fi
             exit
             ;;
         "Java 8 32bit (JRE)")
-            sudo tar zxvf jre-8u261-linux-i586.tar.gz
+            sudo tar zxvf jre-8u261-linux-i586.tar.gz -C /usr/java
             sudo rm jre-8u261-linux-i586.tar.gz
-            sudo mv jre1.8.0_261 /usr/java
             export JAVA_BIN_DIR=/usr/java/jre1.8.0_261/bin
             cd ${JAVA_BIN_DIR}
             a=(java javac javadoc javah javap javaws)
