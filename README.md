@@ -5,3 +5,10 @@ You ought to manually download the JDK/JRE of the Java version of your choosing 
 1. The links die out quickly
 
 And 2. I don't wanna do it just to be on the safe side, I'm also a lazy bitch
+
+
+
+How to execute:
+
+```chmod +x installJava.sh (or installJavaJVM.sh if you downloaded that instead)
+./installJava.sh```
